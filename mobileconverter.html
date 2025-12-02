@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abelha da Amazônia - Mel 100% Natural</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                            url('https://images.pexels.com/photos/8531680/pexels-photo-8531680.jpeg?auto=compress');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+        }
+
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+
+        .hover-scale {
+            transition: transform 0.2s ease;
+        }
+        .hover-scale:active {
+            transform: scale(0.98);
+        }
+
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateY(-100%);
+        }
+
+        .mobile-menu.show {
+            transform: translateY(0);
+        }
+
+        /* Otimizações para toque */
+        button, a {
+            min-height: 44px;
+            min-width: 44px;
+            padding: 12px;
+        }
+
+        /* Ajustes para melhor legibilidade em telas pequenas */
+        @media (max-width: 640px) {
+            .text-mobile-base {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+            .text-mobile-lg {
+                font-size: 1.125rem;
+                line-height: 1.75;
+            }
+            .text-mobile-xl {
+                font-size: 1.25rem;
+                line-height: 1.75;
+            }
+            .text-mobile-2xl {
+                font-size: 1.5rem;
+                line-height: 2;
+            }
+        }
+    </style>
+</head>
+<body class="smooth-scroll">
+    <!-- Barra de Navegação Mobile -->
+    <nav class="bg-white shadow-md fixed w-full top-0 z-50">
+        <div class="px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="text-xl font-bold text-yellow-600 fade-in flex items-center">
+                    <i class="fas fa-bee mr-2"></i>Abelha da Amazônia
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="cart.html" class="relative fade-in">
+                        <i class="fas fa-shopping-cart text-xl text-gray-700"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-yellow-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </a>
+                    <button class="text-gray-700 p-2" type="button" onclick="toggleMenu()">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="mobile-menu bg-white w-full absolute top-full left-0 shadow-lg">
+            <div class="px-4 py-2 space-y-2">
+                <a href="#home" class="block py-3 text-gray-700 hover:text-yellow-600 border-b" onclick="toggleMenu()">Home</a>
+                <a href="#products" class="block py-3 text-gray-700 hover:text-yellow-600 border-b" onclick="toggleMenu()">Produtos</a>
+                <a href="#about" class="block py-3 text-gray-700 hover:text-yellow-600 border-b" onclick="toggleMenu()">Sobre</a>
+                <a href="#contact" class="block py-3 text-gray-700 hover:text-yellow-600" onclick="toggleMenu()">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg flex items-center justify-center text-center pt-16">
+        <div class="bg-black bg-opacity-50 p-6 m-4 rounded-lg fade-in">
+            <h1 class="text-mobile-2xl sm:text-4xl text-white font-bold mb-4">Mel 100% Natural</h1>
+            <p class="text-mobile-lg text-white mb-6">
+                Descubra o sabor puro e natural do nosso mel, direto das colmeias para sua mesa.
+            </p>
+            <a href="#products" class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-full text-mobile-base font-semibold inline-block w-full sm:w-auto">
+                Ver Produtos
+            </a>
+        </div>
+    </section>
+
+    <!-- Sobre Section -->
+    <section id="about" class="py-16 bg-gray-50 px-4">
+        <div class="max-w-lg mx-auto">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-mobile-2xl font-bold text-gray-800 mb-4">Por que escolher nosso mel?</h2>
+                <p class="text-mobile-lg text-gray-600">
+                    Nosso mel é produzido com amor e cuidado, mantendo todas as propriedades naturais.
+                </p>
+            </div>
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-md hover-scale fade-in delay-1">
+                    <i class="fas fa-leaf text-3xl text-green-500 mb-3"></i>
+                    <h3 class="text-mobile-lg font-semibold mb-2">100% Natural</h3>
+                    <p class="text-mobile-base text-gray-600">Sem aditivos químicos ou conservantes artificiais.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover-scale fade-in delay-2">
+                    <i class="fas fa-heart text-3xl text-red-500 mb-3"></i>
+                    <h3 class="text-mobile-lg font-semibold mb-2">Rico em Nutrientes</h3>
+                    <p class="text-mobile-base text-gray-600">Fonte natural de vitaminas, minerais e antioxidantes.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover-scale fade-in delay-3">
+                    <i class="fas fa-award text-3xl text-yellow-500 mb-3"></i>
+                    <h3 class="text-mobile-lg font-semibold mb-2">Qualidade Premium</h3>
+                    <p class="text-mobile-base text-gray-600">Produzido seguindo os mais altos padrões de qualidade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Produtos Section -->
+    <section id="products" class="py-16 px-4">
+        <div class="max-w-lg mx-auto">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-mobile-2xl font-bold text-gray-800 mb-4">Nossos Produtos</h2>
+                <p class="text-mobile-lg text-gray-600">Descubra nossa seleção de produtos naturais</p>
+            </div>
+            <div class="space-y-6" id="products-grid">
+                <!-- Produtos serão carregados via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato Section -->
+    <section id="contact" class="py-16 bg-gray-50 px-4">
+        <div class="max-w-lg mx-auto">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-mobile-2xl font-bold text-gray-800 mb-4">Entre em Contato</h2>
+                <p class="text-mobile-lg text-gray-600">Tem alguma dúvida? Estamos aqui para ajudar!</p>
+            </div>
+            <form id="contact-form" class="bg-white p-6 rounded-lg shadow-md fade-in delay-1">
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
+                    <input type="text" id="name" name="name" required 
+                           class="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-yellow-500">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                    <input type="email" id="email" name="email" required 
+                           class="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-yellow-500">
+                </div>
+                <div class="mb-6">
+                    <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Mensagem</label>
+                    <textarea id="message" name="message" rows="4" required 
+                              class="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"></textarea>
+                </div>
+                <button type="submit" 
+                        class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-md">
+                    Enviar Mensagem
+                </button>
+            </form>
+            <div id="form-status" class="mt-4 text-center hidden"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 px-4">
+        <div class="max-w-lg mx-auto">
+            <div class="space-y-8">
+                <div class="text-center fade-in">
+                    <h3 class="text-mobile-xl font-bold mb-4">
+                        <i class="fas fa-bee mr-2"></i>Abelha da Amazônia
+                    </h3>
+                    <p class="text-mobile-base text-gray-300">
+                        Produzindo mel de qualidade premium desde sempre.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-8 fade-in delay-1">
+                    <div>
+                        <h4 class="text-mobile-lg font-semibold mb-4">Links</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#home" class="text-gray-300 hover:text-yellow-400">Home</a></li>
+                            <li><a href="#products" class="text-gray-300 hover:text-yellow-400">Produtos</a></li>
+                            <li><a href="#about" class="text-gray-300 hover:text-yellow-400">Sobre</a></li>
+                            <li><a href="#contact" class="text-gray-300 hover:text-yellow-400">Contato</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-mobile-lg font-semibold mb-4">Contato</h4>
+                        <div class="space-y-2 text-gray-300 text-mobile-base">
+                            <p><i class="fas fa-phone mr-2"></i>(69) 9361-4393</p>
+                            <p><i class="fas fa-envelope mr-2"></i>paulocbergamin@hotmail.com</p>
+                            <p><i class="fas fa-map-marker-alt mr-2"></i>Porto Velho, RO</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-300 text-mobile-base">&copy; 2024 Abelha da Amazônia. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Array de produtos
+        const products = [
+            {
+                id: "1",
+                name: "Favo de Mel 400g",
+                image: "https://images.pexels.com/photos/1643381/pexels-photo-1643381.jpeg?auto=compress&cs=tinysrgb&w=400",
+                price: 40,
+                description: "Mel puro em favo natural"
+            },
+            {
+                id: "2",
+                name: "Mel de 1kg",
+                image: "https://images.pexels.com/photos/1305012/pexels-photo-1305012.jpeg?auto=compress&cs=tinysrgb&w=400",
+                price: 60,
+                description: "Mel puro de flores silvestres"
+            },
+            {
+                id: "3",
+                name: "Mel de 480g",
+                image: "https://images.pexels.com/photos/5026192/pexels-photo-5026192.jpeg?auto=compress&cs=tinysrgb&w=400",
+                price: 30,
+                description: "Mel cristalizado natural"
+            },
+            {
+                id: "4",
+                name: "Extrato de Própolis Verde",
+                image: "https://images.pexels.com/photos/776530/pexels-photo-776530.jpeg?auto=compress&cs=tinysrgb&w=400",
+                price: 25,
+                description: "Própolis verde concentrado"
+            },
+            {
+                id: "5",
+                name: "Extrato de Própolis Marrom",
+                image: "https://images.pexels.com/photos/776530/pexels-photo-776530.jpeg?auto=compress&cs=tinysrgb&w=400",
+                price: 25,
+                description: "Própolis marrom tradicional"
+            },
+            {
+                id: "6",
+                name: "Combo: Mel 1kg + Própolis",
+                image: "https://images.pexels.com/photos/235986/pexels-photo-235986.jpeg?auto=compress&cs=tinysrgb&w=400",
+                price: 80,
+                description: "Kit completo para sua saúde"
+            }
+        ];
+
+        // Função para carregar produtos
+        function loadProducts() {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = products.map((product, index) => `
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover-scale fade-in" style="animation-delay: ${index * 0.2}s">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-mobile-lg font-semibold mb-2">${product.name}</h3>
+                        <p class="text-mobile-base text-gray-600 mb-4">${product.description}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-bold text-yellow-600">R$ ${product.price}</span>
+                            <button onclick="addToCart('${product.id}')" 
+                                    class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md">
+                                Comprar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Toggle menu mobile
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('show');
+        }
+
+        // Funções do carrinho
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('products', JSON.stringify(products));
+            updateCartCount();
+
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Adicionado ✓';
+            button.classList.add('bg-green-500');
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('bg-green-500');
+            }, 1000);
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+            updateCartCount();
+        });
+
+        // Formulário de contato
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const email = formData.get('email');
+            const name = formData.get('name');
+            const message = formData.get('message');
+            
+            const mailtoLink = `mailto:paulocbergamin@hotmail.com?subject=Contato do Site - ${name}&body=${message}%0A%0AEmail para resposta: ${email}`;
+            window.location.href = mailtoLink;
+            
+            const status = document.getElementById('form-status');
+            status.className = 'mt-4 text-center text-green-600 fade-in';
+            status.textContent = 'Mensagem enviada com sucesso!';
+            status.classList.remove('hidden');
+            
+            this.reset();
+            
+            setTimeout(() => {
+                status.classList.add('hidden');
+            }, 5000);
+        });
+
+        // Navegação suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animações de fade in
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            element.style.animationPlayState = 'paused';
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>

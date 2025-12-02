@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título da página -->
+    <title>Abelha da Amazônia - Mel 100% Natural</title>
+    
+    <!-- Importação do Tailwind CSS para estilização -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Importação dos ícones Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Estilos CSS personalizados -->
+    <style>
+        /* Animações de Fade In */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Classe para elementos com fade in */
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+        }
+
+        /* Atrasos para diferentes elementos */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* Background da seção hero com gradiente */
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                            url('C:/Users/ítalo Bergamin/Documents/Abelha da Amazônia Pasta/Images/bee-7283312.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Scroll suave para navegação */
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+
+        /* Efeito de escala ao passar o mouse */
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+
+        /* Animação para o menu mobile */
+        .mobile-menu-enter {
+            animation: slideDown 0.3s ease forwards;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== NOVOS EFEITOS DE ABELHA ===== */
+        
+        /* Animação de abelha voando */
+        @keyframes flyingBee {
+            0% { transform: translateX(-20px) translateY(0px) rotate(0deg); }
+            25% { transform: translateX(10px) translateY(-5px) rotate(5deg); }
+            50% { transform: translateX(30px) translateY(0px) rotate(0deg); }
+            75% { transform: translateX(10px) translateY(5px) rotate(-5deg); }
+            100% { transform: translateX(-20px) translateY(0px) rotate(0deg); }
+        }
+
+        /* Abelha voadora no hover da navegação */
+        .nav-bee {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-bee::after {
+            content: '🐝';
+            position: absolute;
+            top: 50%;
+            left: -30px;
+            transform: translateY(-50%);
+            font-size: 16px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            animation: flyingBee 2s infinite ease-in-out;
+            animation-play-state: paused;
+        }
+
+        .nav-bee:hover::after {
+            opacity: 1;
+            left: calc(100% + 10px);
+            animation-play-state: running;
+        }
+
+        /* Padrão de favo de mel */
+        .honeycomb-bg {
+            background-image: 
+                radial-gradient(circle at 25% 25%, #fbbf24 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, #f59e0b 2px, transparent 2px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            animation: honeycombFloat 10s infinite ease-in-out;
+        }
+
+        @keyframes honeycombFloat {
+            0%, 100% { background-position: 0 0, 20px 20px; }
+            50% { background-position: 10px 10px, 30px 30px; }
+        }
+
+        /* Efeito de gotejamento de mel */
+        .honey-drip {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .honey-drip::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            width: 4px;
+            height: 0;
+            background: linear-gradient(to bottom, #fbbf24, #f59e0b);
+            border-radius: 0 0 50% 50%;
+            transform: translateX(-50%);
+            transition: height 0.5s ease;
+        }
+
+        .honey-drip:hover::before {
+            height: 20px;
+            animation: drip 1s ease-in-out;
+        }
+
+        @keyframes drip {
+            0% { height: 0; }
+            50% { height: 25px; }
+            100% { height: 20px; }
+        }
+
+        /* Trilha de abelha */
+        .bee-trail {
+            position: relative;
+        }
+
+        .bee-trail::after {
+            content: '✨';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            font-size: 12px;
+            animation: sparkle 1.5s infinite;
+        }
+
+        .bee-trail:hover::after {
+            opacity: 1;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        /* Efeito de zumbido visual */
+        .buzz-effect {
+            transition: all 0.3s ease;
+        }
+
+        .buzz-effect:hover {
+            animation: buzz 0.5s ease-in-out;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+        }
+
+        @keyframes buzz {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+        }
+
+        /* Hexágono de mel */
+        .hex-honey {
+            position: relative;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            transition: all 0.3s ease;
+        }
+
+        .hex-honey:hover {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 10px 25px rgba(251, 191, 36, 0.4);
+        }
+
+        /* Animação de flores */
+        .flower-bloom {
+            transition: all 0.4s ease;
+        }
+
+        .flower-bloom:hover {
+            animation: bloom 0.6s ease-in-out;
+        }
+
+        @keyframes bloom {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.15) rotate(5deg); }
+            100% { transform: scale(1.1) rotate(0deg); }
+        }
+
+        /* Efeito de mel dourado */
+        .golden-honey {
+            background: linear-gradient(45deg, #fbbf24, #f59e0b, #fbbf24);
+            background-size: 200% 200%;
+            animation: goldenShine 3s ease-in-out infinite;
+        }
+
+        @keyframes goldenShine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Partículas de pólen */
+        .pollen-particles {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pollen-particles::before {
+            content: '✨ ⭐ ✨';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            opacity: 0;
+            animation: pollenFloat 4s infinite ease-in-out;
+            pointer-events: none;
+            font-size: 12px;
+            color: #fbbf24;
+        }
+
+        .pollen-particles:hover::before {
+            opacity: 0.7;
+        }
+
+        @keyframes pollenFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(120deg); }
+            66% { transform: translateY(-5px) rotate(240deg); }
+        }
+
+        /* Efeito de colmeia */
+        .hive-pattern {
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(251, 191, 36, 0.1) 10px,
+                    rgba(251, 191, 36, 0.1) 20px
+                ),
+                repeating-linear-gradient(
+                    60deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(251, 191, 36, 0.1) 10px,
+                    rgba(251, 191, 36, 0.1) 20px
+                ),
+                repeating-linear-gradient(
+                    120deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(251, 191, 36, 0.1) 10px,
+                    rgba(251, 191, 36, 0.1) 20px
+                );
+        }
+
+        /* Abelha flutuante */
+        .floating-bee {
+            position: fixed;
+            top: 20%;
+            right: -50px;
+            font-size: 24px;
+            z-index: 1000;
+            animation: floatingBee 15s infinite linear;
+            pointer-events: none;
+        }
+
+        @keyframes floatingBee {
+            0% { right: -50px; transform: translateY(0px); }
+            25% { right: 25%; transform: translateY(-20px); }
+            50% { right: 50%; transform: translateY(10px); }
+            75% { right: 75%; transform: translateY(-15px); }
+            100% { right: 100%; transform: translateY(0px); }
+        }
+
+        /* ===== NOVOS EFEITOS MINIMALISTAS ===== */
+        
+        /* Animação suave de entrada para textos */
+        .text-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: textReveal 0.8s ease forwards;
+        }
+
+        @keyframes textReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Efeito de linha animada */
+        .animated-line {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animated-line::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            transition: width 0.6s ease;
+        }
+
+        .animated-line:hover::after {
+            width: 100%;
+        }
+
+        /* Sombra suave animada */
+        .soft-shadow {
+            transition: box-shadow 0.3s ease;
+        }
+
+        .soft-shadow:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Efeito de brilho sutil */
+        .subtle-glow {
+            transition: all 0.3s ease;
+        }
+
+        .subtle-glow:hover {
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Animação de contador */
+        .counter-animation {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        .counter-animation:hover {
+            transform: scale(1.1);
+        }
+
+        /* Efeito de ondulação minimalista */
+        .ripple-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple-effect::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .ripple-effect:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Gradiente animado sutil */
+        .gradient-shift {
+            background: linear-gradient(45deg, #f8f9fa, #ffffff, #f8f9fa);
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Efeito de respiração para ícones */
+        .breathe {
+            animation: breathe 3s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Linha decorativa animada */
+        .decorative-line {
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .decorative-line::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #fbbf24, transparent);
+            transform: translateX(-50%);
+            animation: lineGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes lineGlow {
+            0%, 100% { opacity: 0.5; width: 50px; }
+            50% { opacity: 1; width: 80px; }
+        }
+
+        /* Efeito de elevação suave */
+        .gentle-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gentle-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="smooth-scroll">
+    <!-- Barra de Navegação (NavBar) - Contém o menu principal e logo -->
+    <nav class="bg-white shadow-md fixed w-full top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <!-- Logo e nome da empresa -->
+                <div class="text-2xl font-bold text-yellow-600 fade-in">
+                    <i class="fas fa-bee mr-2"></i>Abelha&apos; da Amazônia
+                </div>
+                <!-- Menu de navegação para desktop -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <ul class="flex space-x-8">
+                        <li class="fade-in delay-1"><a href="#home" class="nav-bee text-gray-700 hover:text-yellow-600 transition duration-300">Home</a></li>
+                        <li class="fade-in delay-2"><a href="#products" class="nav-bee text-gray-700 hover:text-yellow-600 transition duration-300">Produtos</a></li>
+                        <li class="fade-in delay-2"><a href="#about" class="nav-bee text-gray-700 hover:text-yellow-600 transition duration-300">Sobre</a></li>
+                        <li class="fade-in delay-3"><a href="#contact" class="nav-bee text-gray-700 hover:text-yellow-600 transition duration-300">Contato</a></li>
+                    </ul>
+                    <a href="cart.html" class="relative fade-in delay-3 buzz-effect">
+                        <i class="fas fa-shopping-cart text-xl text-gray-700 hover:text-yellow-600 transition duration-300"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-yellow-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center counter-animation">0</span>
+                    </a>
+                </div>
+                <!-- Botão do menu mobile -->
+                <button class="md:hidden text-gray-700" type="button" onclick="toggleMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            <!-- Menu mobile para dispositivos menores -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4 mobile-menu-enter">
+                <a href="#home" class="block py-2 text-gray-700 hover:text-yellow-600">Home</a>
+                <a href="#products" class="block py-2 text-gray-700 hover:text-yellow-600">Produtos</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-yellow-600">Sobre</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-yellow-600">Contato</a>
+                <a href="cart.html" class="block py-2 text-gray-700 hover:text-yellow-600">
+                    <i class="fas fa-shopping-cart mr-2"></i>Carrinho
+                    <span id="cart-count-mobile" class="ml-1 bg-yellow-500 text-white text-xs rounded-full px-2 py-1">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Seção Hero - Banner principal -->
+    <section id="home" class="hero-bg h-screen flex items-center justify-center text-center">
+        <div class="bg-black bg-opacity-50 p-8 rounded-lg max-w-2xl mx-4 fade-in">
+            <h1 class="text-5xl md:text-6xl text-white font-bold mb-4">Mel 100% Natural</h1>
+            <p class="text-xl text-white mb-8">
+                Descubra o sabor puro e natural do nosso mel, direto das colmeias para sua mesa.
+            </p>
+            <a href="#products" class="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-3 rounded-full text-lg font-semibold transition duration-300 inline-block buzz-effect golden-honey">
+                Ver Produtos
+            </a>
+        </div>
+    </section>
+
+    <!-- Seção Sobre - Informações sobre o produto -->
+    <section id="about" class="py-20 bg-gray-50 honeycomb-bg">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4 decorative-line">Por que escolher nosso mel?</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Nosso mel é produzido com amor e cuidado, mantendo todas as propriedades naturais e benefícios para sua saúde.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Cards de benefícios com fade in em sequência -->
+                <div class="text-center p-6 bg-white rounded-lg shadow-md hover-scale fade-in delay-1 soft-shadow gradient-shift">
+                    <i class="fas fa-leaf text-4xl text-green-500 mb-4 flower-bloom breathe"></i>
+                <h3 class="text-xl font-semibold mb-3 animated-line">100% Natural</h3>
+                    <p class="text-gray-600">Sem aditivos químicos ou conservantes artificiais.</p>
+                </div>
+                <div class="text-center p-6 bg-white rounded-lg shadow-md hover-scale fade-in delay-2 honey-drip soft-shadow gradient-shift">
+                    <i class="fas fa-heart text-4xl text-red-500 mb-4 flower-bloom"></i>
+                    <h3 class="text-xl font-semibold mb-3">Rico em Nutrientes</h3>
+                    <p class="text-gray-600">Fonte natural de vitaminas, minerais e antioxidantes.</p>
+                </div>
+                <div class="text-center p-6 bg-white rounded-lg shadow-md hover-scale fade-in delay-3 pollen-particles soft-shadow gradient-shift">
+                    <i class="fas fa-award text-4xl text-yellow-500 mb-4 flower-bloom"></i>
+                    <h3 class="text-xl font-semibold mb-3">Qualidade Premium</h3>
+                    <p class="text-gray-600">Produzido seguindo os mais altos padrões de qualidade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Produtos - Catálogo -->
+    <section id="products" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4 decorative-line">Nossos Produtos</h2>
+                <p class="text-xl text-gray-600">Descubra nossa seleção de produtos naturais de alta qualidade</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="products-grid">
+                <!-- Produtos serão carregados aqui via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Contato - Formulário -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4 decorative-line">Entre em Contato</h2>
+                <p class="text-xl text-gray-600">Tem alguma dúvida? Estamos aqui para ajudar!</p>
+            </div>
+            <div class="max-w-2xl mx-auto fade-in delay-1">
+                <form id="contact-form" class="bg-white p-8 rounded-lg shadow-md gentle-lift">
+                    <div class="mb-6">
+                        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nome</label>
+                        <input type="text" id="name" name="name" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-yellow-500">
+                    </div>
+                    <div class="mb-6">
+                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                        <input type="email" id="email" name="email" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-yellow-500">
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Mensagem</label>
+                        <textarea id="message" name="message" rows="4" required 
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-yellow-500"></textarea>
+                    </div>
+                    <button type="submit" 
+                            class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-md transition duration-300 buzz-effect golden-honey">
+                        Enviar Mensagem
+                    </button>
+                </form>
+                <div id="form-status" class="mt-4 text-center hidden"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Rodapé -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-4">
+                        <i class="fas fa-bee mr-2"></i>Abelha&apos; da Amazônia
+                    </h3>
+                    <p class="text-gray-300">
+                        Produzindo mel de qualidade premium desde sempre, 
+                        com amor pela natureza e cuidado com nossos clientes.
+                    </p>
+                </div>
+                <div class="fade-in delay-1">
+                    <h4 class="text-lg font-semibold mb-4">Links Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-300 hover:text-yellow-400 transition duration-300">Home</a></li>
+                        <li><a href="#products" class="text-gray-300 hover:text-yellow-400 transition duration-300">Produtos</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-yellow-400 transition duration-300">Sobre</a></li>
+                        <li><a href="#contact" class="text-gray-300 hover:text-yellow-400 transition duration-300">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="fade-in delay-2">
+                    <h4 class="text-lg font-semibold mb-4">Contato</h4>
+                    <div class="space-y-2 text-gray-300">
+                        <p><i class="fas fa-phone mr-2"></i>(69) 9361-4393</p>
+                        <p><i class="fas fa-envelope mr-2"></i>paulocbergamin@hotmail.com</p>
+                        <p><i class="fas fa-map-marker-alt mr-2"></i>Porto Velho, RO</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-300">&copy; 2024 Abelha da Amazônia. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Array de produtos - Catálogo de produtos disponíveis
+        const products = [
+            {
+                id: "1",
+                name: "Favo de Mel 400g",
+                image: "C:/Users/ítalo Bergamin/Documents/Abelha da Amazônia Pasta/Images/image_3.png",
+                price: 40,
+                description: "Mel puro em favo natural"
+            },
+            {
+                id: "2",
+                name: "Mel de 1kg",
+                image: "https://images.pexels.com/photos/1305012/pexels-photo-1305012.jpeg?auto=compress&cs=tinysrgb&w=400",
+                price: 60,
+                description: "Mel puro de flores silvestres"
+            },
+            {
+                id: "3",
+                name: "Mel de 480g",
+                image: "C:/Users/ítalo Bergamin/Documents/Abelha da Amazônia Pasta/Images/image_5.png",
+                price: 30,
+                description: "Mel cristalizado natural"
+            },
+            {
+                id: "4",
+                name: "Extrato de Própolis Verde",
+                image: "C:/Users/ítalo Bergamin/Documents/Abelha da Amazônia Pasta/Images/image_2.png",
+                price: 25,
+                description: "Própolis verde concentrado"
+            },
+            {
+                id: "5",
+                name: "Extrato de Própolis Marrom",
+                image: "https://images.pexels.com/photos/776530/pexels-photo-776530.jpeg?auto=compress&cs=tinysrgb&w=400",
+                price: 25,
+                description: "Própolis marrom tradicional"
+            },
+            {
+                id: "6",
+                name: "Combo: Mel 1kg + Própolis",
+                image: "C:/Users/ítalo Bergamin/Documents/Abelha da Amazônia Pasta/Images/image.png",
+                price: 80,
+                description: "Kit completo para sua saúde"
+            }
+        ];
+
+        // Função para carregar os produtos na página
+        function loadProducts() {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = products.map((product, index) => `
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover-scale fade-in hive-pattern" style="animation-delay: ${index * 0.2}s">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">${product.name}</h3>
+                        <p class="text-gray-600 mb-4">${product.description}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-yellow-600">R$ ${product.price}</span>
+                <button onclick="addToCart('${product.id}')" 
+                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition duration-300 buzz-effect bee-trail ripple-effect">
+                                Comprar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Função para alternar a visibilidade do menu mobile
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Funções do carrinho de compras
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+            document.getElementById('cart-count-mobile').textContent = count;
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('products', JSON.stringify(products)); // Store products for cart page
+            updateCartCount();
+
+            // Feedback visual
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Adicionado ✓';
+            button.classList.add('bg-green-500');
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('bg-green-500');
+            }, 1000);
+        }
+
+        // Inicializa o contador do carrinho
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+            updateCartCount();
+        });
+
+        // Manipulador do formulário de contato
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Coleta os dados do formulário
+            const formData = new FormData(this);
+            const email = formData.get('email');
+            const name = formData.get('name');
+            const message = formData.get('message');
+            
+            // Configuração para envio de email
+            const mailtoLink = `mailto:paulocbergamin@hotmail.com?subject=Contato do Site - ${name}&body=${message}%0A%0AEmail para resposta: ${email}`;
+            window.location.href = mailtoLink;
+            
+            // Atualiza o status do formulário
+            const status = document.getElementById('form-status');
+            status.className = 'mt-4 text-center text-green-600 fade-in';
+            status.textContent = 'Mensagem enviada com sucesso! Entraremos em contato em breve.';
+            status.classList.remove('hidden');
+            
+            // Limpa o formulário
+            this.reset();
+            
+            // Esconde a mensagem de sucesso após 5 segundos
+            setTimeout(() => {
+                status.classList.add('hidden');
+            }, 5000);
+        });
+
+        // Configuração da navegação suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Fecha o menu mobile se estiver aberto
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Adiciona animações de fade in aos elementos quando eles entram na viewport
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            element.style.animationPlayState = 'paused';
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
