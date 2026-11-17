@@ -1,0 +1,176 @@
+/**
+ * Abelha da Amazônia - Estilos Visuais Personalizados
+ * Cores temáticas: Dourado Âmbar, Mel Selvagem, Verde Floresta e Tons Neutros Orgânicos
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+
+:root {
+    --color-honey-50: #fffbeb;
+    --color-honey-100: #fef3c7;
+    --color-honey-200: #fde68a;
+    --color-honey-300: #fcd34d;
+    --color-honey-400: #fbbf24;
+    --color-honey-500: #f59e0b;
+    --color-honey-600: #d97706;
+    --color-honey-700: #b45309;
+    --color-forest-900: #064e3b;
+    --color-forest-800: #065f46;
+    --color-forest-700: #047857;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #1f2937;
+    background-color: #fafaf9;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Scroll suave */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #f59e0b;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #d97706;
+}
+
+/* Animação de Favo de Mel Geométrico */
+.honeycomb-pattern {
+    background-color: #fafaf9;
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(245, 158, 11, 0.08) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(217, 119, 6, 0.08) 2px, transparent 2px);
+    background-size: 32px 32px;
+}
+
+.hero-gradient {
+    background: linear-gradient(135deg, rgba(6, 78, 59, 0.94) 0%, rgba(17, 24, 39, 0.88) 100%),
+                url('https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Animações */
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+    50% { box-shadow: 0 0 20px 4px rgba(245, 158, 11, 0.25); }
+}
+
+.pulse-glow {
+    animation: pulseGlow 2.5s infinite;
+}
+
+/* Badge Dourada */
+.badge-gold {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    color: #92400e;
+    border: 1px solid #fcd34d;
+}
+
+/* Efeito de Card com Elevação Suave */
+.product-card {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(245, 158, 11, 0.2);
+}
+
+/* Transições de Modal e Drawer */
+.drawer-transition {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Efeito de Linha Decorativa */
+.title-underline {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+.title-underline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #f59e0b, #10b981);
+    border-radius: 9999px;
+}
+
+/* Botão com efeito de Brilho de Mel */
+.btn-honey {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+.btn-honey:hover {
+    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+    box-shadow: 0 8px 16px -4px rgba(217, 119, 6, 0.4);
+    transform: translateY(-1px);
+}
+
+/* Efeito de abelha flutuante no menu */
+.nav-link {
+    position: relative;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #f59e0b;
+    transition: width 0.25s ease;
+}
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Estilo para comprovante impresso */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #printable-receipt, #printable-receipt * {
+        visibility: visible;
+    }
+    #printable-receipt {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    .no-print {
+        display: none !important;
+    }
+}
