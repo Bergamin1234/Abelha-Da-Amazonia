@@ -1,11 +1,11 @@
 /**
  * Abelha da Amazônia - Dados Iniciais de Produtos
- * Produtos naturais, sustentáveis e de colheita consciente na região amazônica.
+ * Fotos reais dos produtos e do apiário em Porto Velho - Rondônia
  */
 const DEFAULT_PRODUCTS = [
     {
         id: "prod-1",
-        name: "Favo de Mel Puro da Amazônia 400g",
+        name: "Favo de Mel Puro da Amazônia",
         category: "favos",
         categoryName: "Favos Naturais",
         price: 45.00,
@@ -13,12 +13,12 @@ const DEFAULT_PRODUCTS = [
         stock: 28,
         rating: 4.9,
         reviewsCount: 34,
-        image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=80",
+        image: "assets/img/products/mel-favo-real.jpg",
         badge: "Mais Vendido",
-        description: "Puro mel colhido direto do favo natural, preservando traços benéficos de cera de abelha, própolis e pólen florido da floresta amazônica.",
+        description: "Puro mel colhido direto do favo natural no apiário amazônico, preservando traços benéficos de cera de abelha, própolis e pólen florido da floresta.",
         details: {
             origin: "Porto Velho - Rondônia / Floresta Amazônica",
-            volume: "400g",
+            volume: "Favo natural in natura",
             ingredients: "100% Mel de abelha silvestre em favo operculado",
             conservation: "Manter em local fresco, arejado e ao abrigo da luz solar.",
             benefits: ["Ação antioxidante e anti-inflamatória", "Rico em enzimas vivas e minerais", "Auxilia na imunidade e digestão"]
@@ -34,11 +34,11 @@ const DEFAULT_PRODUCTS = [
         stock: 45,
         rating: 5.0,
         reviewsCount: 68,
-        image: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=800&q=80",
+        image: "assets/img/products/mel-pote-1kg.jpg",
         badge: "Destaque",
-        description: "Mel 100% puro e cru de floradas silvestres nativas da Amazônia. Sabor encorpado, notas florais suaves e aroma irresistível.",
+        description: "Mel 100% puro e cru de floradas silvestres nativas da Amazônia. Sabor encorpado, notas florais e aroma autêntico da mata.",
         details: {
-            origin: "Região do Rio Madeira, RO",
+            origin: "Região do Rio Madeira, Porto Velho - RO",
             volume: "1.000g (1kg)",
             ingredients: "100% Mel de abelhas africanizadas da Amazônia",
             conservation: "Em temperatura ambiente. Se cristalizar, aquecer em banho-maria até 40°C.",
@@ -55,9 +55,9 @@ const DEFAULT_PRODUCTS = [
         stock: 36,
         rating: 4.8,
         reviewsCount: 29,
-        image: "https://images.unsplash.com/photo-1471943311424-646960669fbc?auto=format&fit=crop&w=800&q=80",
+        image: "assets/img/products/mel-pote-480g.jpg",
         badge: null,
-        description: "Mel com textura aveludada e coloração dourada intensa. Extraído artesanalmente sem aquecimento industrial para preservar todas as propriedades.",
+        description: "Mel puro com coloração dourada intensa. Extraído artesanalmente sem aquecimento industrial para preservar todas as propriedades nutritivas.",
         details: {
             origin: "Colmeias de manejo sustentável - RO",
             volume: "480g",
@@ -76,9 +76,9 @@ const DEFAULT_PRODUCTS = [
         stock: 50,
         rating: 4.9,
         reviewsCount: 52,
-        image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80",
+        image: "assets/img/products/propolis-verde-frasco.jpg",
         badge: "Imunidade",
-        description: "Extrato de alta concentração (mínimo 15% de extrato seco). Poderoso fortalecedor do sistema imunológico com compostos bioativos exclusivos.",
+        description: "Extrato de alta concentração de própolis verde da flora amazônica. Poderoso fortalecedor do sistema imunológico com compostos bioativos exclusivos.",
         details: {
             origin: "Bioma Amazônico Brasileiro",
             volume: "30ml com conta-gotas",
@@ -89,7 +89,7 @@ const DEFAULT_PRODUCTS = [
     },
     {
         id: "prod-5",
-        name: "Extrato de Própolis Marrom Concentrado 30ml",
+        name: "Extrato de Própolis Tradicional Concentrado",
         category: "propolis",
         categoryName: "Extratos & Própolis",
         price: 25.00,
@@ -97,7 +97,7 @@ const DEFAULT_PRODUCTS = [
         stock: 40,
         rating: 4.7,
         reviewsCount: 21,
-        image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
+        image: "assets/img/products/extrato-propolis-mesa.jpg",
         badge: null,
         description: "Fórmula tradicional das matas amazônicas. Excelente para uso diário em gargarejos, prevenção de gripes e fortalecimento geral da saúde.",
         details: {
@@ -110,65 +110,65 @@ const DEFAULT_PRODUCTS = [
     },
     {
         id: "prod-6",
-        name: "Super Combo Imunidade: Mel 1kg + 2 Própolis",
+        name: "Super Combo Imunidade: Mel + Própolis",
         category: "kits",
         categoryName: "Kits Especiais",
-        price: 105.00,
-        originalPrice: 125.00,
+        price: 85.00,
+        originalPrice: 105.00,
         stock: 20,
         rating: 5.0,
         reviewsCount: 47,
-        image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80",
-        badge: "Economia de R$ 20",
-        description: "Nosso kit campeão com melhor custo-benefício: 1 Pote de 1kg do nosso Mel Silvestre + 1 Própolis Verde + 1 Própolis Marrom com desconto imperdível.",
+        image: "assets/img/products/combo-produtos.jpg",
+        badge: "Economia Especial",
+        description: "Nosso kit campeão com melhor custo-benefício: Mel Puro Silvestre + Extrato de Própolis Verde Concentrado com desconto imperdível.",
         details: {
             origin: "Produção Integrada Abelha da Amazônia",
-            volume: "Kit com 3 itens (1kg + 30ml + 30ml)",
+            volume: "Kit com Mel Silvestre + Própolis",
             ingredients: "Produtos 100% puros e naturais da Amazônia",
             conservation: "Guardar em local fresco.",
-            benefits: ["Tratamento imunológico completo para toda a família", "Melhor valor por grama"]
+            benefits: ["Tratamento imunológico completo para toda a família", "Melhor valor por item"]
         }
     },
     {
         id: "prod-7",
-        name: "Pólen Apícola Desidratado 150g",
+        name: "Mel no Caixilho Rústico do Apiário",
         category: "favos",
         categoryName: "Favos Naturais",
-        price: 38.00,
-        originalPrice: 44.00,
-        stock: 25,
-        rating: 4.8,
+        price: 95.00,
+        originalPrice: 110.00,
+        stock: 12,
+        rating: 5.0,
         reviewsCount: 18,
-        image: "https://images.unsplash.com/photo-1598970434795-0c54fe7c0648?auto=format&fit=crop&w=800&q=80",
-        badge: "Superalimento",
-        description: "Concentrado natural de proteínas vegetais, aminoácidos essenciais e vitaminas do complexo B coletadas pelas abelhas nativas.",
+        image: "assets/img/products/mel-caixilho-apiario.jpg",
+        badge: "Exclusivo",
+        description: "Experiência apícola autêntica: caixilho inteiro com favo 100% operculado pelas abelhas direto da colmeia na floresta amazônica.",
         details: {
-            origin: "Reserva Apícola de Porto Velho, RO",
-            volume: "150g em pote lacrado",
-            ingredients: "100% grãos de pólen apícola selecionado e desidratado a frio",
-            conservation: "Após aberto, recomenda-se conservar sob refrigeração.",
-            benefits: ["Combate a fadiga física e mental", "Rico em carotenoides e fitoesteróis", "Perfeito para frutas, iogurtes e shakes"]
+            origin: "Apiário Abelha da Amazônia - Porto Velho, RO",
+            volume: "Caixilho apícola integral",
+            ingredients: "100% favo natural operculado com mel e cera pura",
+            conservation: "Conservar em temperatura ambiente.",
+            benefits: ["O mel mais fresco e inalterado possível", "Cera mastigável rica em pólen"]
         }
     },
     {
         id: "prod-8",
-        name: "Mel Nobre de Abelha Nativa Sem Ferrão (Melípona) 250g",
-        category: "mel",
-        categoryName: "Mel Puro",
-        price: 85.00,
-        originalPrice: 95.00,
-        stock: 15,
-        rating: 5.0,
+        name: "Favo de Mel em Embalagem Especial para Presente",
+        category: "favos",
+        categoryName: "Favos Naturais",
+        price: 55.00,
+        originalPrice: 65.00,
+        stock: 22,
+        rating: 4.9,
         reviewsCount: 31,
-        image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80",
-        badge: "Raridade",
-        description: "Extraído de abelhas nativas sem ferrão (Meliponíneos da Amazônia). Possui acidez nobre, textura mais fluida, notas cítricas únicas e alto valor medicinal.",
+        image: "assets/img/products/favo-caixa.jpg",
+        badge: "Presenteável",
+        description: "Pedaço nobre de favo de mel selecionado e acondicionado em embalagem rígida higiênica, perfeito para consumo próprio ou presentear com saúde.",
         details: {
-            origin: "Meliponário Sustentável da Amazônia Ocidental",
-            volume: "250g em vidro especial",
-            ingredients: "100% Mel de abelhas sem ferrão (Melipona sp.)",
-            conservation: "Recomenda-se manter refrigerado após aberto para preservar aromas finos.",
-            benefits: ["Propriedades antimicrobianas superiores", "Menor índice glicêmico", "Experiência gastronômica gourmet única"]
+            origin: "Apiário Abelha da Amazônia",
+            volume: "Embalagem individual selada",
+            ingredients: "100% mel em favo",
+            conservation: "Local seco e arejado.",
+            benefits: ["Apresentação impecável", "Ideal para tábuas de queijos e café da manhã"]
         }
     }
 ];
@@ -183,8 +183,9 @@ const DEFAULT_SETTINGS = {
     companyName: "Abelha da Amazônia",
     phone: "(69) 9361-4393",
     whatsapp: "5569993614393",
+    instagram: "https://www.instagram.com/abelhadaamazonia/",
     email: "paulocbergamin@hotmail.com",
-    address: "Porto Velho - Rondônia, Amazônia - Brasil",
+    address: "Rua Abnatal Bentes de Lima, 687 - Porto Velho - RO",
     pixKey: "paulocbergamin@hotmail.com",
     pixName: "Paulo Cesar Bergamin - Abelha da Amazonia",
     freeShippingThreshold: 200.00

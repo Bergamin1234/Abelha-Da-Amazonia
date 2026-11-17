@@ -7,13 +7,20 @@ const STORAGE_KEYS = {
     ORDERS: 'abz_orders',
     SETTINGS: 'abz_settings',
     CART: 'abz_cart',
-    COUPONS: 'abz_coupons'
+    COUPONS: 'abz_coupons',
+    VERSION: 'abz_version_2'
 };
 
 const Store = {
     // Inicialização da base de dados local
     init() {
-        if (!localStorage.getItem(STORAGE_KEYS.PRODUCTS)) {
+        const hasV2 = localStorage.getItem(STORAGE_KEYS.VERSION);
+        if (!hasV2) {
+            // Atualiza para os produtos com as fotos reais dos apiários
+            localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(DEFAULT_PRODUCTS));
+            localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(DEFAULT_SETTINGS));
+            localStorage.setItem(STORAGE_KEYS.VERSION, 'true');
+        } else if (!localStorage.getItem(STORAGE_KEYS.PRODUCTS)) {
             localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(DEFAULT_PRODUCTS));
         }
         if (!localStorage.getItem(STORAGE_KEYS.SETTINGS)) {
