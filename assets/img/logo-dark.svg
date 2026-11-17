@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 240" width="100%" height="100%">
+    <defs>
+        <linearGradient id="honeyGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FBBF24"/>
+            <stop offset="50%" stop-color="#F59E0B"/>
+            <stop offset="100%" stop-color="#D97706"/>
+        </linearGradient>
+        <linearGradient id="orangeGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FB923C"/>
+            <stop offset="100%" stop-color="#EA580C"/>
+        </linearGradient>
+        <linearGradient id="leafGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#34D399"/>
+            <stop offset="100%" stop-color="#059669"/>
+        </linearGradient>
+    </defs>
+
+    <!-- Top Section: Bee + "Mel" -->
+    <g transform="translate(100, 10)">
+        <!-- Green Leaves Left of Bee -->
+        <path d="M22,50 C10,45 8,30 18,22 C28,15 35,28 30,42 Z" fill="url(#leafGradDark)" opacity="0.95"/>
+        <path d="M12,65 C0,62 0,48 10,42 C20,38 25,52 20,62 Z" fill="url(#leafGradDark)" opacity="0.85"/>
+
+        <!-- Bee Wings -->
+        <ellipse cx="40" cy="42" rx="22" ry="12" transform="rotate(-20 40 42)" fill="#FEF08A" opacity="0.95" stroke="#F59E0B" stroke-width="1.5"/>
+        <ellipse cx="80" cy="42" rx="22" ry="12" transform="rotate(20 80 42)" fill="#FEF08A" opacity="0.95" stroke="#F59E0B" stroke-width="1.5"/>
+        
+        <!-- Green Leaves Right of Bee -->
+        <path d="M98,50 C110,45 112,30 102,22 C92,15 85,28 90,42 Z" fill="url(#leafGradDark)" opacity="0.95"/>
+        <path d="M108,65 C120,62 120,48 110,42 C100,38 95,52 100,62 Z" fill="url(#leafGradDark)" opacity="0.85"/>
+
+        <!-- Bee Antennae -->
+        <path d="M54,18 C50,10 44,8 42,9 M66,18 C70,10 76,8 78,9" fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="42" cy="9" r="2.5" fill="#F59E0B"/>
+        <circle cx="78" cy="9" r="2.5" fill="#F59E0B"/>
+
+        <!-- Bee Body -->
+        <ellipse cx="60" cy="24" rx="9" ry="8" fill="#0F172A"/>
+        <path d="M60,32 C48,32 46,65 60,78 C74,65 72,32 60,32 Z" fill="#0F172A"/>
+        
+        <!-- Bee Golden Stripes -->
+        <path d="M51,42 Q60,46 69,42" fill="none" stroke="#FBBF24" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M50,52 Q60,56 70,52" fill="none" stroke="#FBBF24" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M52,62 Q60,65 68,62" fill="none" stroke="#FBBF24" stroke-width="3.5" stroke-linecap="round"/>
+
+        <!-- Word "Mel" -->
+        <g transform="translate(140, 68)">
+            <!-- Leaf on top of 'e' -->
+            <path d="M52,-55 C40,-65 52,-80 68,-72 C75,-62 68,-48 52,-55 Z" fill="url(#leafGradDark)"/>
+            
+            <text x="0" y="0" font-family="'Playfair Display', Georgia, serif" font-size="74" font-weight="800" fill="url(#orangeGradDark)" letter-spacing="1">
+                Mel
+            </text>
+        </g>
+    </g>
+
+    <!-- Middle: "ABELHA DA" (White) -->
+    <text x="250" y="138" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="34" font-weight="900" fill="#FFFFFF" letter-spacing="5">
+        ABELHA DA
+    </text>
+
+    <!-- Lower: "AMAZÔNIA" (Orange) -->
+    <text x="250" y="190" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="52" font-weight="900" fill="url(#orangeGradDark)" letter-spacing="3">
+        AMAZÔNIA
+    </text>
+
+    <!-- Bottom: Divider & "100% NATURAL" (Golden Sand) -->
+    <g transform="translate(0, 218)">
+        <line x1="50" y1="0" x2="160" y2="0" stroke="#E0B36E" stroke-width="2" opacity="0.7"/>
+        <text x="250" y="4" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="800" fill="#E0B36E" letter-spacing="4">
+            100% NATURAL
+        </text>
+        <line x1="340" y1="0" x2="450" y2="0" stroke="#E0B36E" stroke-width="2" opacity="0.7"/>
+    </g>
+</svg>
