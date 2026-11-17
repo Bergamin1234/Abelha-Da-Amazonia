@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - Abelha da Amazônia</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amber: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex">
+
+    <!-- Mobile Sidebar Backdrop -->
+    <div id="admin-sidebar-backdrop" onclick="toggleAdminSidebar()" class="hidden fixed inset-0 bg-black/50 z-40 lg:hidden"></div>
+
+    <!-- Admin Sidebar -->
+    <aside id="admin-sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 flex flex-col transition-transform duration-300 transform -translate-x-full lg:translate-x-0 lg:static flex-shrink-0">
+        
+        <!-- Sidebar Brand -->
+        <div class="p-6 border-b border-slate-800 flex items-center justify-between">
+            <a href="admin.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center text-white text-lg shadow-md shadow-amber-500/20">
+                    <i class="fas fa-bee"></i>
+                </div>
+                <div>
+                    <h2 class="text-sm font-bold font-serif text-white tracking-tight leading-tight">Abelha da Amazônia</h2>
+                    <span class="text-[10px] uppercase tracking-widest text-amber-500 font-bold">Painel de Gestão</span>
+                </div>
+            </a>
+            <button onclick="toggleAdminSidebar()" class="lg:hidden text-slate-400 hover:text-white">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto">
+            <a href="#" data-tab="dashboard" class="admin-nav-item admin-sidebar-link active">
+                <i class="fas fa-chart-pie w-5 text-center"></i>
+                <span>Visão Geral</span>
+            </a>
+            <a href="#" data-tab="orders" class="admin-nav-item admin-sidebar-link">
+                <i class="fas fa-shopping-bag w-5 text-center"></i>
+                <span>Vendas & Pedidos</span>
+            </a>
+            <a href="#" data-tab="products" class="admin-nav-item admin-sidebar-link">
+                <i class="fas fa-boxes-stacked w-5 text-center"></i>
+                <span>Catálogo & Estoque</span>
+            </a>
+            <a href="#" data-tab="pos" class="admin-nav-item admin-sidebar-link">
+                <i class="fas fa-cash-register w-5 text-center text-amber-400"></i>
+                <span>Nova Venda (PDV)</span>
+            </a>
+            <a href="#" data-tab="settings" class="admin-nav-item admin-sidebar-link">
+                <i class="fas fa-sliders w-5 text-center"></i>
+                <span>Configurações</span>
+            </a>
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="p-4 border-t border-slate-800 space-y-2">
+            <a href="index.html" target="_blank" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition">
+                <i class="fas fa-external-link-alt text-amber-400"></i>
+                <span>Ver Loja Online</span>
+            </a>
+            <button onclick="Auth.logout()" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-red-400 hover:text-red-300 hover:bg-red-500/10 transition text-left cursor-pointer">
+                <i class="fas fa-right-from-bracket"></i>
+                <span>Encerrar Sessão</span>
+            </button>
+        </div>
+
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+        
+        <!-- Top App Bar -->
+        <header class="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between sticky top-0 z-30 shadow-2xs">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleAdminSidebar()" class="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="text-lg font-bold font-serif text-slate-900" id="admin-page-title">Administração da Loja</h1>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <!-- User Profile Badge -->
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-full bg-amber-500 text-white font-bold flex items-center justify-center text-xs shadow-xs">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="hidden sm:block text-left">
+                        <span id="admin-logged-user" class="text-xs font-bold text-slate-900 block leading-tight">Administrador</span>
+                        <span class="text-[10px] text-emerald-600 font-semibold block">Sessão Ativa</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dynamic Body Content -->
+        <main class="p-6 max-w-7xl w-full mx-auto space-y-6">
+            
+            <!-- ============================================== -->
+            <!-- 1. SECTION: DASHBOARD -->
+            <!-- ============================================== -->
+            <section id="section-dashboard" class="admin-section space-y-6">
+                
+                <!-- Quick KPI Metrics -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    
+                    <div class="admin-card p-5 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Faturamento Confirmado</span>
+                            <h3 id="metric-revenue" class="text-2xl font-bold font-serif text-slate-900 mt-1">R$ 0,00</h3>
+                            <span class="text-[11px] text-emerald-600 font-semibold mt-1 inline-block">Vendas Concluídas</span>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
+                            <i class="fas fa-sack-dollar"></i>
+                        </div>
+                    </div>
+
+                    <div class="admin-card p-5 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total de Pedidos</span>
+                            <h3 id="metric-orders" class="text-2xl font-bold font-serif text-slate-900 mt-1">0</h3>
+                            <span class="text-[11px] text-amber-600 font-semibold mt-1 inline-block">Online e Presencial</span>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl">
+                            <i class="fas fa-cart-shopping"></i>
+                        </div>
+                    </div>
+
+                    <div class="admin-card p-5 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Ticket Médio</span>
+                            <h3 id="metric-avg-ticket" class="text-2xl font-bold font-serif text-slate-900 mt-1">R$ 0,00</h3>
+                            <span class="text-[11px] text-slate-400 font-semibold mt-1 inline-block">Por cliente</span>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                    </div>
+
+                    <div class="admin-card p-5 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Estoque em Alerta</span>
+                            <h3 id="metric-low-stock" class="text-2xl font-bold font-serif text-slate-900 mt-1">0</h3>
+                            <span class="text-[11px] text-amber-600 font-semibold mt-1 inline-block">Produtos ≤ 15 un</span>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl">
+                            <i class="fas fa-triangle-exclamation"></i>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Fast Actions Bar -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <button onclick="Admin.switchTab('pos')" class="p-4 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-xs flex items-center justify-between shadow-md hover:from-amber-600 hover:to-amber-700 transition cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-cash-register text-xl"></i>
+                            <div class="text-left">
+                                <span class="block">Registrar Nova Venda</span>
+                                <span class="text-[10px] font-normal text-amber-100">Balcão ou WhatsApp</span>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </button>
+
+                    <button onclick="Admin.openNewProductModal()" class="p-4 rounded-2xl bg-slate-900 text-white font-bold text-xs flex items-center justify-between shadow-md hover:bg-slate-800 transition cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-plus text-xl text-amber-400"></i>
+                            <div class="text-left">
+                                <span class="block">Adicionar Novo Produto</span>
+                                <span class="text-[10px] font-normal text-slate-400">Cadastrar no catálogo</span>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </button>
+
+                    <button onclick="Admin.switchTab('orders')" class="p-4 rounded-2xl bg-white border border-slate-200 text-slate-800 font-bold text-xs flex items-center justify-between shadow-xs hover:bg-slate-50 transition cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-list text-xl text-emerald-600"></i>
+                            <div class="text-left">
+                                <span class="block">Gerenciar Todos os Pedidos</span>
+                                <span class="text-[10px] font-normal text-slate-500">Mudar status e envio</span>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Recent Orders Table Card -->
+                <div class="admin-card overflow-hidden">
+                    <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+                        <h4 class="font-bold text-sm text-slate-900 uppercase tracking-wider">Últimos Pedidos Registrados</h4>
+                        <button onclick="Admin.switchTab('orders')" class="text-xs font-semibold text-amber-600 hover:text-amber-700">Ver Todos →</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-slate-50 text-[11px] font-bold uppercase text-slate-500 border-b border-slate-200">
+                                <tr>
+                                    <th class="py-3 px-4">ID Pedido</th>
+                                    <th class="py-3 px-4">Cliente</th>
+                                    <th class="py-3 px-4">Data</th>
+                                    <th class="py-3 px-4">Valor Total</th>
+                                    <th class="py-3 px-4">Status</th>
+                                    <th class="py-3 px-4 text-right">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dashboard-recent-orders">
+                                <!-- Preenchido via Admin.renderDashboard() -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ============================================== -->
+            <!-- 2. SECTION: VENDAS & PEDIDOS -->
+            <!-- ============================================== -->
+            <section id="section-orders" class="admin-section hidden space-y-6">
+                
+                <div class="admin-card p-6 space-y-4">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b border-slate-100">
+                        <div>
+                            <h3 class="text-lg font-bold font-serif text-slate-900">Histórico de Vendas & Pedidos</h3>
+                            <p class="text-xs text-slate-500" id="orders-count-label">Carregando...</p>
+                        </div>
+
+                        <!-- Filter Status Pills -->
+                        <div class="flex flex-wrap items-center gap-1.5" id="orders-filter-chips">
+                            <button onclick="filterOrdersByStatus('all')" class="order-filter-btn px-3 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-white">Todos</button>
+                            <button onclick="filterOrdersByStatus('Pendente')" class="order-filter-btn px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">Pendentes</button>
+                            <button onclick="filterOrdersByStatus('Pago')" class="order-filter-btn px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">Pagos</button>
+                            <button onclick="filterOrdersByStatus('Enviado')" class="order-filter-btn px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">Enviados</button>
+                            <button onclick="filterOrdersByStatus('Entregue')" class="order-filter-btn px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">Entregues</button>
+                            <button onclick="filterOrdersByStatus('Cancelado')" class="order-filter-btn px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">Cancelados</button>
+                        </div>
+                    </div>
+
+                    <!-- Search Input -->
+                    <div class="relative max-w-md">
+                        <input type="text" id="orders-search-input" placeholder="Buscar por número do pedido, nome ou telefone..." 
+                               class="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500">
+                        <i class="fas fa-search absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                    </div>
+
+                    <!-- Orders Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-slate-50 text-[11px] font-bold uppercase text-slate-500 border-b border-slate-200">
+                                <tr>
+                                    <th class="py-3 px-4">ID</th>
+                                    <th class="py-3 px-4">Cliente / Contato</th>
+                                    <th class="py-3 px-4">Data</th>
+                                    <th class="py-3 px-4">Forma Pgto</th>
+                                    <th class="py-3 px-4">Total</th>
+                                    <th class="py-3 px-4">Status</th>
+                                    <th class="py-3 px-4 text-right">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-table-body">
+                                <!-- Preenchido dinamicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ============================================== -->
+            <!-- 3. SECTION: CATÁLOGO & ESTOQUE -->
+            <!-- ============================================== -->
+            <section id="section-products" class="admin-section hidden space-y-6">
+                
+                <div class="admin-card p-6 space-y-4">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b border-slate-100">
+                        <div>
+                            <h3 class="text-lg font-bold font-serif text-slate-900">Catálogo de Produtos & Controle de Estoque</h3>
+                            <p class="text-xs text-slate-500" id="admin-products-count">Carregando...</p>
+                        </div>
+
+                        <button onclick="Admin.openNewProductModal()" class="px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-xs font-bold shadow-xs transition flex items-center gap-2 cursor-pointer">
+                            <i class="fas fa-plus"></i>
+                            <span>Novo Produto</span>
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-slate-50 text-[11px] font-bold uppercase text-slate-500 border-b border-slate-200">
+                                <tr>
+                                    <th class="py-3 px-4">Foto</th>
+                                    <th class="py-3 px-4">Nome & Categoria</th>
+                                    <th class="py-3 px-4">Preço (R$)</th>
+                                    <th class="py-3 px-4">Estoque Atual</th>
+                                    <th class="py-3 px-4">Situação</th>
+                                    <th class="py-3 px-4 text-right">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-products-table-body">
+                                <!-- Preenchido via Admin.renderProducts() -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ============================================== -->
+            <!-- 4. SECTION: PONTO DE VENDA (PDV BALCÃO) -->
+            <!-- ============================================== -->
+            <section id="section-pos" class="admin-section hidden space-y-6">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    
+                    <!-- Left: Products to Select (7 cols) -->
+                    <div class="lg:col-span-7 admin-card p-6 space-y-4">
+                        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                            <div>
+                                <h3 class="text-base font-bold font-serif text-slate-900">Selecionar Produtos para Venda</h3>
+                                <p class="text-xs text-slate-500">Clique no item para adicionar à venda do balcão</p>
+                            </div>
+                        </div>
+
+                        <div id="pos-products-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-[600px] overflow-y-auto pr-1">
+                            <!-- Injetado via Admin.renderPOS() -->
+                        </div>
+                    </div>
+
+                    <!-- Right: POS Register & Receipt (5 cols) -->
+                    <div class="lg:col-span-5 admin-card p-6 space-y-4 flex flex-col justify-between">
+                        
+                        <div>
+                            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                                <h4 class="text-sm font-bold uppercase tracking-wider text-slate-900">Itens da Venda</h4>
+                                <button onclick="Admin.posCart = []; Admin.renderPOSCart();" class="text-xs text-red-500 hover:underline">Limpar</button>
+                            </div>
+
+                            <!-- POS Cart Items List -->
+                            <div id="pos-cart-items" class="space-y-2 py-3 max-h-56 overflow-y-auto pr-1">
+                                <!-- Itens adicionados -->
+                            </div>
+                        </div>
+
+                        <!-- Customer Info & Payment Details -->
+                        <div class="space-y-3 pt-4 border-t border-slate-100">
+                            
+                            <div>
+                                <label for="pos-customer-name" class="block text-xs font-bold text-slate-700 mb-1">Nome do Cliente (Opcional)</label>
+                                <input type="text" id="pos-customer-name" placeholder="Ex: João da Silva / Balcão"
+                                       class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label for="pos-customer-phone" class="block text-xs font-bold text-slate-700 mb-1">WhatsApp</label>
+                                    <input type="text" id="pos-customer-phone" placeholder="(69) 99999-9999"
+                                           class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500">
+                                </div>
+                                <div>
+                                    <label for="pos-payment-method" class="block text-xs font-bold text-slate-700 mb-1">Forma de Pagamento</label>
+                                    <select id="pos-payment-method" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500 font-semibold text-slate-800">
+                                        <option value="pix">Pix</option>
+                                        <option value="dinheiro">Dinheiro</option>
+                                        <option value="cartao_debito">Cartão Débito</option>
+                                        <option value="cartao_credito">Cartão Crédito</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Total -->
+                            <div class="flex items-center justify-between p-4 bg-amber-50 rounded-2xl border border-amber-200 mt-2">
+                                <span class="text-xs font-bold text-amber-900 uppercase tracking-wider">Total a Receber:</span>
+                                <span id="pos-total" class="text-2xl font-serif font-bold text-amber-700">R$ 0,00</span>
+                            </div>
+
+                            <!-- Conclude Sale Button -->
+                            <button onclick="Admin.finishPOSSale()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl text-xs shadow-md transition flex items-center justify-center gap-2 cursor-pointer">
+                                <i class="fas fa-check-circle text-base"></i>
+                                <span>Concluir Venda e Abater Estoque</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- ============================================== -->
+            <!-- 5. SECTION: CONFIGURAÇÕES -->
+            <!-- ============================================== -->
+            <section id="section-settings" class="admin-section hidden space-y-6">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Company Settings Form -->
+                    <div class="admin-card p-6 space-y-4">
+                        <h3 class="text-base font-bold font-serif text-slate-900 pb-3 border-b border-slate-100">
+                            Dados da Empresa & Recebimento
+                        </h3>
+
+                        <form onsubmit="Admin.saveSettingsForm(event)" class="space-y-3">
+                            <div>
+                                <label for="set-company-name" class="block text-xs font-bold text-slate-700 mb-1">Nome Comercial</label>
+                                <input type="text" id="set-company-name" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label for="set-phone" class="block text-xs font-bold text-slate-700 mb-1">Telefone / WhatsApp</label>
+                                    <input type="text" id="set-phone" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500">
+                                </div>
+                                <div>
+                                    <label for="set-email" class="block text-xs font-bold text-slate-700 mb-1">E-mail de Contato</label>
+                                    <input type="email" id="set-email" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="set-pix-key" class="block text-xs font-bold text-slate-700 mb-1">Chave Pix Oficial para Recebimentos</label>
+                                <input type="text" id="set-pix-key" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500 font-mono">
+                            </div>
+
+                            <div>
+                                <label for="set-pix-name" class="block text-xs font-bold text-slate-700 mb-1">Nome do Titular do Pix</label>
+                                <input type="text" id="set-pix-name" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500">
+                            </div>
+
+                            <div>
+                                <label for="set-address" class="block text-xs font-bold text-slate-700 mb-1">Endereço da Sede / Apiário</label>
+                                <input type="text" id="set-address" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500">
+                            </div>
+
+                            <button type="submit" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl text-xs transition shadow-xs cursor-pointer">
+                                Salvar Alterações
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Security & Backup Form -->
+                    <div class="space-y-6">
+                        
+                        <div class="admin-card p-6 space-y-4">
+                            <h3 class="text-base font-bold font-serif text-slate-900 pb-3 border-b border-slate-100">
+                                Segurança de Acesso
+                            </h3>
+
+                            <form onsubmit="Admin.changePassword(event)" class="space-y-3">
+                                <div>
+                                    <label for="pwd-current" class="block text-xs font-bold text-slate-700 mb-1">Senha Atual</label>
+                                    <input type="password" id="pwd-current" required placeholder="Digite a senha atual"
+                                           class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500">
+                                </div>
+                                <div>
+                                    <label for="pwd-new" class="block text-xs font-bold text-slate-700 mb-1">Nova Senha</label>
+                                    <input type="password" id="pwd-new" required placeholder="Mínimo 5 caracteres"
+                                           class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500">
+                                </div>
+                                <button type="submit" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl text-xs transition cursor-pointer">
+                                    Atualizar Senha
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Data Backup -->
+                        <div class="admin-card p-6 space-y-3">
+                            <h3 class="text-base font-bold font-serif text-slate-900 pb-2 border-b border-slate-100">
+                                Backup e Exportação
+                            </h3>
+                            <p class="text-xs text-slate-500">Baixe uma cópia completa de todos os produtos e pedidos cadastrados em formato JSON.</p>
+                            <button onclick="Admin.exportData()" class="px-4 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl text-xs transition flex items-center gap-2 cursor-pointer">
+                                <i class="fas fa-download"></i>
+                                <span>Exportar Backup dos Dados</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modal: Detalhes do Pedido -->
+    <div id="order-detail-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 relative">
+            <button onclick="Admin.closeOrderModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition">
+                <i class="fas fa-times text-xs"></i>
+            </button>
+            <div id="order-detail-content">
+                <!-- Preenchido via Admin.viewOrderDetails() -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Criar / Editar Produto -->
+    <div id="product-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 relative">
+            <button onclick="Admin.closeProductModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition">
+                <i class="fas fa-times text-xs"></i>
+            </button>
+            
+            <h3 class="text-lg font-bold font-serif text-slate-900 mb-4 pb-2 border-b border-slate-100" id="product-modal-title">
+                Cadastrar Produto
+            </h3>
+
+            <form id="product-form" onsubmit="Admin.saveProductForm(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="prod-id">
+
+                <div>
+                    <label for="prod-name" class="block font-bold text-slate-700 mb-1">Nome do Produto *</label>
+                    <input type="text" id="prod-name" required placeholder="Ex: Mel Silvestre 1kg"
+                           class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label for="prod-category" class="block font-bold text-slate-700 mb-1">Categoria *</label>
+                        <select id="prod-category" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500 font-semibold">
+                            <option value="mel">Mel Puro</option>
+                            <option value="propolis">Extratos & Própolis</option>
+                            <option value="favos">Favos Naturais</option>
+                            <option value="kits">Kits Especiais</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="prod-badge" class="block font-bold text-slate-700 mb-1">Selo / Destaque (Opcional)</label>
+                        <input type="text" id="prod-badge" placeholder="Ex: Mais Vendido"
+                               class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-2">
+                    <div>
+                        <label for="prod-price" class="block font-bold text-slate-700 mb-1">Preço (R$) *</label>
+                        <input type="number" step="0.01" min="0" id="prod-price" required placeholder="65.00"
+                               class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500">
+                    </div>
+
+                    <div>
+                        <label for="prod-original-price" class="block font-bold text-slate-700 mb-1">De (R$) Riscado</label>
+                        <input type="number" step="0.01" min="0" id="prod-original-price" placeholder="75.00"
+                               class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500">
+                    </div>
+
+                    <div>
+                        <label for="prod-stock" class="block font-bold text-slate-700 mb-1">Estoque *</label>
+                        <input type="number" min="0" id="prod-stock" required placeholder="50"
+                               class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500 font-bold">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="prod-image" class="block font-bold text-slate-700 mb-1">URL da Imagem *</label>
+                    <input type="url" id="prod-image" required placeholder="https://..."
+                           class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500 font-mono">
+                </div>
+
+                <div>
+                    <label for="prod-description" class="block font-bold text-slate-700 mb-1">Descrição do Produto</label>
+                    <textarea id="prod-description" rows="3" placeholder="Detalhes, origem botânica, textura..."
+                              class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-amber-500"></textarea>
+                </div>
+
+                <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+                    <button type="button" onclick="Admin.closeProductModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold transition">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="px-5 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-bold transition shadow-xs">
+                        Salvar Produto
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/store.js"></script>
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/admin.js"></script>
+    <script>
+        function toggleAdminSidebar() {
+            const sidebar = document.getElementById('admin-sidebar');
+            const backdrop = document.getElementById('admin-sidebar-backdrop');
+            if (sidebar) sidebar.classList.toggle('-translate-x-full');
+            if (backdrop) backdrop.classList.toggle('hidden');
+        }
+
+        function filterOrdersByStatus(status) {
+            document.querySelectorAll('#orders-filter-chips button').forEach(btn => {
+                btn.className = 'order-filter-btn px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200';
+            });
+            event.target.className = 'order-filter-btn px-3 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-white';
+            
+            const searchVal = document.getElementById('orders-search-input').value;
+            Admin.renderOrders(status, searchVal);
+        }
+
+        document.getElementById('orders-search-input').addEventListener('input', (e) => {
+            const activeBtn = document.querySelector('#orders-filter-chips button.bg-amber-500');
+            const status = activeBtn ? activeBtn.textContent : 'all';
+            Admin.renderOrders(status === 'Todos' ? 'all' : status, e.target.value);
+        });
+    </script>
+</body>
+</html>
