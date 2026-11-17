@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Confirmado! - Abelha da Amazônia</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amber: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-stone-100 text-gray-800 antialiased min-h-screen pb-16">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-stone-200 py-4 shadow-2xs no-print">
+        <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-9 h-9 bg-amber-500 rounded-xl flex items-center justify-center text-white text-base">
+                    <i class="fas fa-bee"></i>
+                </div>
+                <span class="text-lg font-bold font-serif text-gray-900">
+                    Abelha da <span class="text-amber-600">Amazônia</span>
+                </span>
+            </a>
+            <span class="text-xs text-gray-500 font-medium">Comprovante de Compra</span>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 pt-10" id="printable-receipt">
+        
+        <!-- Success Alert Header -->
+        <div class="bg-white rounded-3xl p-8 border border-stone-200 shadow-sm text-center mb-8">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 animate-bounce">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            
+            <span class="text-xs uppercase font-extrabold tracking-widest text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">
+                Pedido Gerado com Sucesso!
+            </span>
+            
+            <h1 class="text-2xl sm:text-3xl font-bold font-serif text-gray-900 mt-3 mb-1">
+                Obrigado pela sua compra, <span id="customer-name-display">Cliente</span>!
+            </h1>
+            <p class="text-xs sm:text-sm text-gray-500 max-w-lg mx-auto">
+                Seu pedido foi registrado em nosso sistema. Enviamos a confirmação detalhada para seu e-mail e nossa equipe já está preparando os produtos com todo carinho.
+            </p>
+
+            <div class="inline-flex items-center gap-3 px-4 py-2 bg-stone-100 rounded-2xl text-xs font-mono font-bold text-gray-800 mt-6 border border-stone-200">
+                <span>Número do Pedido:</span>
+                <span id="order-id-display" class="text-amber-600 font-extrabold text-sm">#ABZ-2026-0000</span>
+            </div>
+        </div>
+
+        <!-- Payment Instructions Box (Pix / Cartão / Boleto) -->
+        <div id="payment-instructions-box" class="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm mb-8">
+            <!-- Preenchido dinamicamente via JS -->
+        </div>
+
+        <!-- Order Details Card -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm mb-8 space-y-6">
+            <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider pb-3 border-b border-stone-100 flex items-center gap-2">
+                <i class="fas fa-list-check text-amber-500"></i>
+                <span>Itens do Pedido</span>
+            </h3>
+
+            <!-- Items Table -->
+            <div id="order-items-table" class="divide-y divide-stone-100">
+                <!-- Injetado dinamicamente -->
+            </div>
+
+            <!-- Customer & Shipping Summary Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-stone-100 text-xs">
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-2 uppercase text-[11px] tracking-wider text-amber-700">Endereço de Envio</h4>
+                    <p id="dest-address" class="text-gray-600 leading-relaxed font-medium">Carregando...</p>
+                    <p id="dest-shipping-method" class="text-gray-500 mt-1">Forma de Envio: -</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-2 uppercase text-[11px] tracking-wider text-amber-700">Dados do Pagamento</h4>
+                    <p id="dest-payment-info" class="text-gray-600 leading-relaxed font-medium">Carregando...</p>
+                    <p id="dest-payment-status" class="mt-1 font-bold text-emerald-600">Status: Confirmado</p>
+                </div>
+            </div>
+
+            <!-- Totals -->
+            <div class="bg-amber-50/50 p-4 rounded-2xl border border-amber-100 space-y-2 text-xs">
+                <div class="flex justify-between text-gray-600">
+                    <span>Subtotal:</span>
+                    <span id="order-subtotal" class="font-bold text-gray-900">R$ 0,00</span>
+                </div>
+                <div id="order-discount-row" class="flex justify-between text-emerald-600 hidden">
+                    <span>Desconto Total:</span>
+                    <span id="order-discount" class="font-bold">- R$ 0,00</span>
+                </div>
+                <div class="flex justify-between text-gray-600">
+                    <span>Frete:</span>
+                    <span id="order-shipping" class="font-bold text-gray-900">R$ 0,00</span>
+                </div>
+                <div class="flex justify-between text-base font-bold text-gray-900 pt-2 border-t border-amber-200">
+                    <span>Valor Total:</span>
+                    <span id="order-total" class="text-amber-600 font-serif text-lg">R$ 0,00</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-4 no-print">
+            <button onclick="window.print()" class="px-6 py-3 rounded-full bg-stone-800 hover:bg-stone-900 text-white text-xs font-bold transition flex items-center gap-2 shadow-xs cursor-pointer">
+                <i class="fas fa-print"></i>
+                <span>Imprimir Comprovante / PDF</span>
+            </button>
+
+            <a id="whatsapp-notify-btn" href="#" target="_blank" class="px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition flex items-center gap-2 shadow-xs">
+                <i class="fab fa-whatsapp text-sm"></i>
+                <span>Acompanhar no WhatsApp</span>
+            </a>
+
+            <a href="index.html" class="px-6 py-3 rounded-full border border-stone-300 hover:bg-white text-gray-700 text-xs font-bold transition flex items-center gap-2">
+                <i class="fas fa-shopping-basket text-amber-600"></i>
+                <span>Voltar à Loja</span>
+            </a>
+        </div>
+
+    </main>
+
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/store.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let order = null;
+            try {
+                order = JSON.parse(sessionStorage.getItem('abz_latest_order'));
+            } catch(e) {}
+
+            if (!order) {
+                // Tenta pegar o mais recente do Store se houver
+                const orders = Store.getOrders();
+                if (orders && orders.length > 0) {
+                    order = orders[0];
+                }
+            }
+
+            if (!order) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Exibir dados básicos
+            document.getElementById('customer-name-display').textContent = order.customer.name.split(' ')[0] || 'Cliente';
+            document.getElementById('order-id-display').textContent = `#${order.id}`;
+
+            // Renderizar itens
+            const itemsContainer = document.getElementById('order-items-table');
+            itemsContainer.innerHTML = order.items.map(item => `
+                <div class="flex items-center justify-between py-3">
+                    <div class="flex items-center gap-3">
+                        <img src="${item.image}" alt="${item.name}" class="w-12 h-12 rounded-xl object-cover border border-stone-200">
+                        <div>
+                            <h5 class="text-xs font-bold text-gray-900">${item.name}</h5>
+                            <span class="text-[11px] text-gray-500">Qtd: ${item.quantity} un × ${Store.formatCurrency(item.price)}</span>
+                        </div>
+                    </div>
+                    <div class="text-right text-xs font-bold text-gray-900">
+                        ${Store.formatCurrency(item.price * item.quantity)}
+                    </div>
+                </div>
+            `).join('');
+
+            // Endereço
+            const a = order.customer.address;
+            document.getElementById('dest-address').textContent = `${a.street}, ${a.number} ${a.complement ? '- ' + a.complement : ''} - ${a.neighborhood}, ${a.city} - ${a.state} (CEP: ${a.cep})`;
+            document.getElementById('dest-shipping-method').textContent = `Forma de Envio: ${order.shippingMethod || 'Padrão'}`;
+
+            // Totais
+            document.getElementById('order-subtotal').textContent = Store.formatCurrency(order.subtotal);
+            if (order.discount > 0) {
+                document.getElementById('order-discount-row').classList.remove('hidden');
+                document.getElementById('order-discount').textContent = `- ${Store.formatCurrency(order.discount)}`;
+            }
+            document.getElementById('order-shipping').textContent = order.shipping === 0 ? 'Grátis' : Store.formatCurrency(order.shipping);
+            document.getElementById('order-total').textContent = Store.formatCurrency(order.total);
+
+            // Método de Pagamento
+            const paymentBox = document.getElementById('payment-instructions-box');
+            if (order.paymentMethod === 'pix') {
+                document.getElementById('dest-payment-info').textContent = 'Pix Instantâneo (Chave E-mail: paulocbergamin@hotmail.com)';
+                document.getElementById('dest-payment-status').textContent = `Status: ${order.paymentStatus || 'Aguardando Pagamento'}`;
+                
+                paymentBox.innerHTML = `
+                    <div class="text-center max-w-md mx-auto space-y-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-full border border-emerald-200">
+                            <i class="fas fa-qrcode"></i>
+                            <span>Pague com Pix para Envio Imediato</span>
+                        </div>
+                        <h3 class="text-lg font-bold font-serif text-gray-900">Escaneie o QR Code Pix</h3>
+                        
+                        <!-- QR Code Visual -->
+                        <div class="p-4 bg-white border-2 border-stone-200 rounded-2xl inline-block shadow-md">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=00020126580014BR.GOV.BCB.PIX0136paulocbergamin@hotmail.com5204000053039865802BR5925Paulo%20C%20Bergamin%20Abelha6011Porto%20Velho62070503***6304${order.id}" 
+                                 alt="QR Code Pix Abelha da Amazônia" 
+                                 class="w-44 h-44 mx-auto">
+                        </div>
+
+                        <!-- Pix Copia e Cola -->
+                        <div class="space-y-1.5 text-left">
+                            <label class="block text-[11px] font-bold text-gray-600">Código Pix Copia e Cola:</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="pix-hash-input" readonly 
+                                       value="00020126580014BR.GOV.BCB.PIX0136paulocbergamin@hotmail.com5204000053039865802BR5925Paulo%20C%20Bergamin%20Abelha6011Porto%20Velho62070503***6304"
+                                       class="flex-1 px-3 py-2 text-xs font-mono bg-stone-50 border border-stone-200 rounded-xl text-gray-600">
+                                <button onclick="copyPixCode()" id="copy-pix-btn" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5">
+                                    <i class="fas fa-copy"></i>
+                                    <span>Copiar</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Simulação de Pagamento Automático para Demonstração -->
+                        <div class="pt-3 border-t border-stone-100">
+                            <button onclick="simulatePixPayment('${order.id}')" id="sim-pix-btn" class="text-xs text-amber-700 hover:text-amber-800 font-bold underline">
+                                [Demonstração] Simular Aprovação Imediata do Pix
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else if (order.paymentMethod === 'cartao') {
+                document.getElementById('dest-payment-info').textContent = 'Cartão de Crédito';
+                document.getElementById('dest-payment-status').textContent = 'Status: Aprovado pela Operadora';
+
+                paymentBox.innerHTML = `
+                    <div class="flex items-center gap-4 text-emerald-800 bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
+                        <div class="w-12 h-12 bg-emerald-600 text-white rounded-xl flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm">Transação de Cartão Aprovada com Sucesso</h4>
+                            <p class="text-xs text-emerald-700 mt-0.5">Seu pagamento foi confirmado instantaneamente. Seu pedido já entrou na esteira de separação para envio.</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                document.getElementById('dest-payment-info').textContent = 'Boleto Bancário';
+                document.getElementById('dest-payment-status').textContent = 'Status: Aguardando Compensação';
+
+                paymentBox.innerHTML = `
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2 font-bold text-gray-900 text-sm">
+                            <i class="fas fa-barcode text-amber-600 text-lg"></i>
+                            <span>Linha Digitável do Boleto:</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <input type="text" readonly value="23793.38128 60000.000003 01000.640004 8 98450000017300" 
+                                   class="flex-1 px-3 py-2 text-xs font-mono bg-stone-50 border border-stone-200 rounded-xl">
+                            <button onclick="navigator.clipboard.writeText('23793.38128 60000.000003 01000.640004 8 98450000017300'); Cart.showToast('Código copiado!', 'success')" 
+                                    class="px-4 py-2 bg-stone-800 text-white text-xs font-bold rounded-xl hover:bg-stone-900 transition">
+                                Copiar
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-500">Vencimento em 3 dias úteis. A compensação ocorre em até 72 horas.</p>
+                    </div>
+                `;
+            }
+
+            // Link WhatsApp para Notificação
+            const waMsg = encodeURIComponent(`Olá equipe Abelha da Amazônia! Acabei de realizar o pedido #${order.id} no valor de ${Store.formatCurrency(order.total)}. Gostaria de acompanhar o envio!`);
+            document.getElementById('whatsapp-notify-btn').href = `https://wa.me/5569993614393?text=${waMsg}`;
+        });
+
+        function copyPixCode() {
+            const input = document.getElementById('pix-hash-input');
+            if (input) {
+                navigator.clipboard.writeText(input.value);
+                const btn = document.getElementById('copy-pix-btn');
+                btn.innerHTML = `<i class="fas fa-check"></i> <span>Copiado!</span>`;
+                btn.classList.remove('bg-emerald-600');
+                btn.classList.add('bg-gray-800');
+                setTimeout(() => {
+                    btn.innerHTML = `<i class="fas fa-copy"></i> <span>Copiar</span>`;
+                    btn.classList.remove('bg-gray-800');
+                    btn.classList.add('bg-emerald-600');
+                }, 2000);
+            }
+        }
+
+        function simulatePixPayment(orderId) {
+            Store.updateOrderStatus(orderId, 'Pago');
+            document.getElementById('dest-payment-status').textContent = 'Status: Pago (Confirmado)';
+            document.getElementById('dest-payment-status').className = 'mt-1 font-bold text-emerald-600';
+            const btn = document.getElementById('sim-pix-btn');
+            if (btn) btn.innerHTML = '✓ Pix Confirmado com Sucesso!';
+            Cart.showToast('Pagamento Pix confirmado no sistema!', 'success');
+        }
+    </script>
+</body>
+</html>

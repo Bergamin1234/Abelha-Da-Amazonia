@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra Segura - Abelha da Amazônia</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amber: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-stone-100 text-gray-800 antialiased min-h-screen">
+
+    <!-- Minimal Secure Checkout Header -->
+    <header class="bg-white border-b border-stone-200 py-4 shadow-2xs">
+        <div class="max-w-6xl mx-auto px-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2.5 group">
+                <div class="w-9 h-9 bg-amber-500 rounded-xl flex items-center justify-center text-white text-base shadow-xs group-hover:scale-105 transition-transform">
+                    <i class="fas fa-bee"></i>
+                </div>
+                <span class="text-lg font-bold font-serif text-gray-900">
+                    Abelha da <span class="text-amber-600">Amazônia</span>
+                </span>
+            </a>
+
+            <div class="flex items-center gap-2 text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
+                <i class="fas fa-lock"></i>
+                <span>Ambiente 100% Criptografado & Seguro</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Checkout Container -->
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        
+        <div class="mb-6 flex items-center justify-between">
+            <div>
+                <a href="index.html#catalogo" class="text-xs font-semibold text-amber-700 hover:text-amber-800 flex items-center gap-1.5 transition">
+                    <i class="fas fa-arrow-left text-[10px]"></i>
+                    <span>Voltar para a Loja</span>
+                </a>
+                <h1 class="text-2xl sm:text-3xl font-bold font-serif text-gray-900 mt-1">Concluir Compra</h1>
+            </div>
+        </div>
+
+        <form id="checkout-form" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left Column: Customer & Delivery & Payment (8 cols) -->
+            <div class="lg:col-span-7 space-y-6">
+                
+                <!-- 1. Dados Pessoais -->
+                <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-xs space-y-4">
+                    <div class="flex items-center gap-2.5 pb-3 border-b border-stone-100">
+                        <span class="w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-bold flex items-center justify-center">1</span>
+                        <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Identificação do Comprador</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="sm:col-span-2">
+                            <label for="name" class="block text-xs font-bold text-gray-700 mb-1">Nome Completo *</label>
+                            <input type="text" id="name" required placeholder="Ex: Maria das Graças Silva"
+                                   class="w-full px-3.5 py-2.5 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 focus:bg-white transition">
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-xs font-bold text-gray-700 mb-1">E-mail para Confirmação *</label>
+                            <input type="email" id="email" required placeholder="seuemail@exemplo.com"
+                                   class="w-full px-3.5 py-2.5 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 focus:bg-white transition">
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block text-xs font-bold text-gray-700 mb-1">WhatsApp / Celular *</label>
+                            <input type="tel" id="phone" required placeholder="(69) 99999-9999"
+                                   class="w-full px-3.5 py-2.5 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 focus:bg-white transition">
+                        </div>
+
+                        <div>
+                            <label for="cpf" class="block text-xs font-bold text-gray-700 mb-1">CPF (para emissão fiscal) *</label>
+                            <input type="text" id="cpf" required placeholder="000.000.000-00"
+                                   class="w-full px-3.5 py-2.5 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 focus:bg-white transition">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Endereço de Entrega -->
+                <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-xs space-y-4">
+                    <div class="flex items-center gap-2.5 pb-3 border-b border-stone-100">
+                        <span class="w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-bold flex items-center justify-center">2</span>
+                        <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Endereço de Entrega</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-6 gap-4">
+                        <div class="sm:col-span-2">
+                            <label for="cep" class="block text-xs font-bold text-gray-700 mb-1">CEP *</label>
+                            <input type="text" id="cep" required placeholder="00000-000" maxlength="9"
+                                   class="w-full px-3.5 py-2.5 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 focus:bg-white transition font-mono">
+                            <span id="cep-status" class="hidden"></span>
+                        </div>
+
+                        <div class="sm:col-span-4">
+                            <label for="street" class="block text-xs font-bold text-gray-700 mb-1">Rua / Avenida *</label>
+                            <input type="text" id="street" required placeholder="Ex: Av. Sete de Setembro"
+                                   class="w-full px-3.5 py-2.5 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 focus:bg-white transition">
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label for="number" class="block text-xs font-bold text-gray-700 mb-1">Número *</label>
+                            <input type="text" id="number" required placeholder="Ex: 1420"
+                                   class="w-full px-3.5 py-2.5 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 focus:bg-white transition">
+                        </div>
+
+                        <div class="sm:col-span-4">
+                            <label for="complement" class="block text-xs font-bold text-gray-700 mb-1">Complemento / Referência</label>
+                            <input type="text" id="complement" placeholder="Ex: Apto 302, Bloco B"
+                                   class="w-full px-3.5 py-2.5 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 focus:bg-white transition">
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label for="neighborhood" class="block text-xs font-bold text-gray-700 mb-1">Bairro *</label>
+                            <input type="text" id="neighborhood" required placeholder="Bairro"
+                                   class="w-full px-3.5 py-2.5 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 focus:bg-white transition">
+                        </div>
+
+                        <div class="sm:col-span-3">
+                            <label for="city" class="block text-xs font-bold text-gray-700 mb-1">Cidade *</label>
+                            <input type="text" id="city" required placeholder="Cidade"
+                                   class="w-full px-3.5 py-2.5 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 focus:bg-white transition">
+                        </div>
+
+                        <div class="sm:col-span-1">
+                            <label for="state" class="block text-xs font-bold text-gray-700 mb-1">UF *</label>
+                            <input type="text" id="state" required placeholder="RO" maxlength="2"
+                                   class="w-full px-3.5 py-2.5 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 focus:bg-white transition uppercase text-center font-mono">
+                        </div>
+                    </div>
+
+                    <!-- Métodos de Envio -->
+                    <div class="pt-4 border-t border-stone-100">
+                        <label class="block text-xs font-bold text-gray-700 mb-2">Forma de Envio:</label>
+                        <div id="shipping-methods-container" class="space-y-2">
+                            <label class="flex items-center justify-between p-3 rounded-xl border border-amber-400 bg-amber-50/40 cursor-pointer">
+                                <div class="flex items-center gap-3">
+                                    <input type="radio" name="shipping_method" value="pac" checked class="text-amber-500">
+                                    <div>
+                                        <div class="text-xs font-bold text-gray-900">PAC Econômico</div>
+                                        <div class="text-[11px] text-gray-500">5 a 9 dias úteis</div>
+                                    </div>
+                                </div>
+                                <div class="text-xs font-bold text-gray-900">R$ 26,50</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Pagamento -->
+                <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-xs space-y-4">
+                    <div class="flex items-center gap-2.5 pb-3 border-b border-stone-100">
+                        <span class="w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-bold flex items-center justify-center">3</span>
+                        <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Forma de Pagamento</h2>
+                    </div>
+
+                    <!-- Payment Tabs -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <button type="button" id="tab-pix" onclick="Checkout.selectPayment('pix')"
+                                class="payment-tab p-3 rounded-2xl border-2 border-amber-500 bg-amber-50/50 text-amber-800 flex flex-col items-center gap-1.5 transition">
+                            <i class="fas fa-qrcode text-lg text-emerald-600"></i>
+                            <span class="text-xs font-bold">PIX Instantâneo</span>
+                            <span class="text-[10px] text-emerald-700 font-extrabold bg-emerald-100 px-2 py-0.5 rounded-full">5% OFF</span>
+                        </button>
+
+                        <button type="button" id="tab-cartao" onclick="Checkout.selectPayment('cartao')"
+                                class="payment-tab p-3 rounded-2xl border-2 border-stone-200 bg-white text-gray-700 flex flex-col items-center gap-1.5 transition">
+                            <i class="fas fa-credit-card text-lg text-amber-500"></i>
+                            <span class="text-xs font-bold">Cartão de Crédito</span>
+                            <span class="text-[10px] text-gray-500">Até 6x s/ juros</span>
+                        </button>
+
+                        <button type="button" id="tab-boleto" onclick="Checkout.selectPayment('boleto')"
+                                class="payment-tab p-3 rounded-2xl border-2 border-stone-200 bg-white text-gray-700 flex flex-col items-center gap-1.5 transition">
+                            <i class="fas fa-barcode text-lg text-stone-600"></i>
+                            <span class="text-xs font-bold">Boleto Bancário</span>
+                            <span class="text-[10px] text-gray-500">1 a 3 dias úteis</span>
+                        </button>
+                    </div>
+
+                    <!-- Pix Section Content -->
+                    <div id="section-pix" class="p-4 rounded-2xl bg-emerald-50/50 border border-emerald-200 space-y-3">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg flex-shrink-0 shadow-xs">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-emerald-900">Aprovação Imediata via Pix</h4>
+                                <p class="text-xs text-emerald-800 leading-relaxed mt-0.5">
+                                    Ao clicar em "Concluir Pedido", você verá o QR Code Pix e a chave copia-e-cola com <strong>5% de desconto exclusivo</strong> já deduzido!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cartão de Crédito Section Content -->
+                    <div id="section-cartao" class="hidden space-y-4 pt-2">
+                        
+                        <!-- Credit Card Visual Preview -->
+                        <div class="max-w-sm mx-auto bg-gradient-to-tr from-gray-900 via-gray-800 to-amber-900 text-white p-5 rounded-2xl shadow-xl space-y-4 font-mono">
+                            <div class="flex justify-between items-center text-xs opacity-75">
+                                <span>Cartão de Crédito</span>
+                                <i class="fas fa-wifi"></i>
+                            </div>
+                            <div id="card-preview-number" class="text-base tracking-widest pt-2">
+                                •••• •••• •••• ••••
+                            </div>
+                            <div class="flex justify-between items-end text-xs pt-2">
+                                <div>
+                                    <div class="text-[9px] opacity-60">TITULAR</div>
+                                    <div id="card-preview-holder" class="font-bold tracking-wider">NOME DO TITULAR</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-[9px] opacity-60">VALIDADE</div>
+                                    <div id="card-preview-exp">MM/AA</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Fields -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                            <div class="sm:col-span-2">
+                                <label for="card-number" class="block text-xs font-bold text-gray-700 mb-1">Número do Cartão *</label>
+                                <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19"
+                                       class="w-full px-3.5 py-2 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 font-mono">
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label for="card-name" class="block text-xs font-bold text-gray-700 mb-1">Nome Impresso no Cartão *</label>
+                                <input type="text" id="card-name" placeholder="Como no cartão"
+                                       class="w-full px-3.5 py-2 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 uppercase">
+                            </div>
+
+                            <div>
+                                <label for="card-exp" class="block text-xs font-bold text-gray-700 mb-1">Validade (MM/AA) *</label>
+                                <input type="text" id="card-exp" placeholder="12/28" maxlength="5"
+                                       class="w-full px-3.5 py-2 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 text-center font-mono">
+                            </div>
+
+                            <div>
+                                <label for="card-cvv" class="block text-xs font-bold text-gray-700 mb-1">CVV (Código) *</label>
+                                <input type="password" id="card-cvv" placeholder="123" maxlength="4"
+                                       class="w-full px-3.5 py-2 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 text-center font-mono">
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label for="card-installments" class="block text-xs font-bold text-gray-700 mb-1">Número de Parcelas *</label>
+                                <select id="card-installments" class="w-full px-3.5 py-2 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 font-semibold text-gray-800">
+                                    <option value="1">1x sem juros</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Boleto Section Content -->
+                    <div id="section-boleto" class="hidden p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-2 text-xs text-gray-600">
+                        <div class="flex items-center gap-2 font-bold text-gray-900">
+                            <i class="fas fa-info-circle text-amber-500"></i>
+                            <span>Instruções do Boleto Bancário:</span>
+                        </div>
+                        <p>• O boleto será gerado logo após a confirmação com código de barras digitável.</p>
+                        <p>• Pode ser pago em qualquer banco ou aplicativo bancário até o vencimento.</p>
+                        <p>• A compensação ocorre em até 3 dias úteis.</p>
+                    </div>
+
+                    <!-- Observações opcionais -->
+                    <div class="pt-2">
+                        <label for="notes" class="block text-xs font-bold text-gray-700 mb-1">Instruções de Entrega (Opcional)</label>
+                        <textarea id="notes" rows="2" placeholder="Ex: Deixar na portaria ou ligar quando chegar..."
+                                  class="w-full px-3.5 py-2 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500"></textarea>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Right Column: Order Review & Financial Totals (5 cols) -->
+            <div class="lg:col-span-5 space-y-6">
+                
+                <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-xs space-y-5 sticky top-28">
+                    
+                    <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider pb-3 border-b border-stone-100 flex items-center justify-between">
+                        <span>Resumo do Pedido</span>
+                        <a href="index.html#catalogo" class="text-amber-600 hover:underline normal-case font-medium text-xs">Alterar</a>
+                    </h3>
+
+                    <!-- Items List -->
+                    <div id="checkout-items-list" class="max-h-60 overflow-y-auto pr-1 divide-y divide-stone-100">
+                        <!-- Itens carregados via checkout.js -->
+                    </div>
+
+                    <!-- Coupon Input -->
+                    <div class="space-y-1.5 pt-2">
+                        <div class="flex gap-2">
+                            <input type="text" id="checkout-coupon-input" placeholder="Possui cupom? Digite aqui"
+                                   class="flex-1 px-3 py-2 text-xs uppercase bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500">
+                            <button type="button" onclick="Checkout.applyCheckoutCoupon()" 
+                                    class="px-3 py-2 bg-stone-800 hover:bg-stone-900 text-white text-xs font-bold rounded-xl transition">
+                                Aplicar
+                            </button>
+                        </div>
+                        <span class="text-[10px] text-gray-400 block">Dica: use <strong>AMAZONIA10</strong> para 10% de desconto</span>
+                    </div>
+
+                    <!-- Financial Breakdown -->
+                    <div class="space-y-2 text-xs text-gray-600 pt-3 border-t border-stone-100">
+                        <div class="flex justify-between">
+                            <span>Subtotal dos Produtos:</span>
+                            <span id="summary-subtotal" class="font-bold text-gray-900">R$ 0,00</span>
+                        </div>
+                        <div id="summary-discount-row" class="flex justify-between text-emerald-600 hidden">
+                            <span>Descontos Aplicados:</span>
+                            <span id="summary-discount" class="font-bold">- R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Frete:</span>
+                            <span id="summary-shipping" class="font-bold text-gray-900">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between text-base font-bold text-gray-900 pt-3 border-t border-stone-100">
+                            <span>Total Geral:</span>
+                            <span id="summary-total" class="text-amber-600 text-xl font-serif">R$ 0,00</span>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" 
+                            class="w-full btn-honey py-3.5 rounded-2xl text-sm font-bold shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Confirmar e Finalizar Pedido</span>
+                    </button>
+
+                    <div class="text-[11px] text-gray-400 text-center space-y-1 pt-1">
+                        <p><i class="fas fa-shield-alt text-emerald-600 mr-1"></i> Seus dados estão seguros e protegidos.</p>
+                        <p>Ao comprar você concorda com nossos termos e política de sustentabilidade.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/store.js"></script>
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/checkout.js"></script>
+</body>
+</html>
