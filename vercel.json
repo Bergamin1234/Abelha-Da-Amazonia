@@ -6,10 +6,8 @@
   "outputDirectory": ".",
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/admin", "destination": "/admin.html" },
-    { "source": "/login", "destination": "/admin-login.html" },
-    { "source": "/checkout", "destination": "/checkout.html" },
-    { "source": "/sucesso", "destination": "/order-success.html" }
+    { "source": "/login", "destination": "/admin-login" },
+    { "source": "/sucesso", "destination": "/order-success" }
   ],
   "headers": [
     {
